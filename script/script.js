@@ -22,7 +22,7 @@ for (let heartIcon of heartIcons) {
     });
 }
 
-
+// call button functionality
 const callBtn = document.getElementsByClassName("call-btn");
 for (let btn of callBtn) {
     btn.addEventListener("click", function (event) {
@@ -78,3 +78,31 @@ for (let btn of callBtn) {
 
     });
 }
+
+// copy button functionality
+
+const copyBtns = document.getElementsByClassName('copy-btn');
+
+
+for (let copyBtn of copyBtns) {
+
+    copyBtn.addEventListener('click', function (e) {
+
+        const copyCount = document.getElementById('copy-count');
+
+        let count = parseInt(copyCount.innerText);
+        count++;
+        copyCount.innerText = count;
+
+
+        const card = copyBtn.closest(".card");
+        console.log(card);
+        const Num = card.querySelector(".card-num").innerText;
+
+        navigator.clipboard.writeText(Num).then(function () {
+            alert(`${Num} is copied to the clipboard`)
+        });
+
+    })
+}
+
