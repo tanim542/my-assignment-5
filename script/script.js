@@ -30,5 +30,17 @@ for (let btn of callBtn) {
         const Num = card.querySelector(".card-num").innerText;
         const Tittle = card.querySelector(".card-tittle").innerText;
         alert("📞 Calling.... to " + Tittle + " " + Num);
+
+        // coin reduction
+        const currentCoin = getInnerNum("available-coin");
+        if (currentCoin >= 20) {
+            let newCoin = currentCoin - 20;
+            document.getElementById("available-coin").innerText = newCoin;
+        }
+        else{
+            alert("You don't have enough coin to make a call. Please recharge your coins.");
+            return;
+        }
+
     });
 }
