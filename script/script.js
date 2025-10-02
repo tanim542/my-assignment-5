@@ -1,3 +1,4 @@
+const callHistoryList = [];
 // function to get inner text value
 function getInnerText(id) {
     const value = document.getElementById(id).innerText;
@@ -37,10 +38,43 @@ for (let btn of callBtn) {
             let newCoin = currentCoin - 20;
             document.getElementById("available-coin").innerText = newCoin;
         }
-        else{
+        else {
             alert("You don't have enough coin to make a call. Please recharge your coins.");
             return;
         }
+
+        // call history
+        const callHistory = {
+            tittle: Tittle,
+            number: Num,
+            time: new Date().toLocaleString()
+        };
+        callHistoryList.push(callHistory);
+        const callHistoryContainer = document.getElementById("call-history-container");
+        document.getElementById("call-history-container").style.display = "block";
+        callHistoryContainer.innerHTML = " ";
+        for (let call of callHistoryList) {
+            const div = document.createElement("div");
+            div.innerHTML = `<div class="flex justify-between items-center rounded-lg p-4 bg-[#fafafa] my-4">
+                    <div>
+                        <h1 class="text-lg font-semibold">${call.tittle}</h1>
+                        <p class="text-lg font-normal text-[#5C5C5C]">${call.number}</p>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-normal">${call.time}</h1>
+                    </div>
+                </div>`
+            callHistoryContainer.appendChild(div);
+        }
+
+        // clear call history  
+        const clearBtn = document.getElementById("clear-btn");
+
+        clearBtn.addEventListener('click', function () {
+
+            const parent = document.getElementById("call-history-container");
+            parent.innerText = '';
+        })
 
     });
 }
